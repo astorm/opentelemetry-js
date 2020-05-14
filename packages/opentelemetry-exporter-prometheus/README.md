@@ -35,8 +35,11 @@ const meter = new MeterProvider({
 }).getMeter('example-prometheus');
 
 // Now, start recording data
-const counter = meter.createCounter('metric_name');
-counter.add(10, { [key]: 'value' });
+const counter = meter.createCounter(
+  'metric_name',
+  {labelKeys:['key']}
+);
+counter.add(10, { key: 'value' });
 
 // Record data using Instrument: It is recommended to keep a reference to the Bound Instrument instead of
 // always calling `bind()` method for every operations.
